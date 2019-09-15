@@ -1,0 +1,44 @@
+﻿@*
+    It is used for the @Model.Name declaration
+    @model BlockbusterInc.Models.Movie
+
+    It is used for the ViewData["Movie"] declaration
+    @using BlockbusterInc.Models
+*@
+
+@model BlockbusterInc.ViewModels.RandomMovieViewModel
+
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var className = Model.Customers.Count > 2 ? "popular" : null;
+}
+
+<h2 class="@className">@Model.Movie.Title</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <text>No one has rented this movie before.</text>
+}
+else
+{
+    <ul>
+        @foreach (var customer in Model.Customers)
+        {
+            <li>@customer.Name</li>
+        }
+    </ul>
+}
+
+@*
+    <h2>@Model.Name</h2> When you pass just a model
+
+    Passing a ViewData (not recommended)
+    <h2>@( ((Movie)ViewData["Movie"]).Name )</h2>
+
+    Passing a ViewBag (also not recommended)
+    <h2>@ViewBag.Movie.Name</h2>
+*@
